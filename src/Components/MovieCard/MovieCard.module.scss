@@ -1,0 +1,46 @@
+.Wrapper {
+  display: flex;
+  border-radius: 10px;
+  width: 500px;
+  margin: 50px auto;
+  flex-wrap: wrap;
+  padding: 25px;
+  background-color: #292929;
+}
+.Title,
+.Rating,
+.Director,
+.Country,
+.Year {
+  width: 100%;
+  margin-bottom: 25px;
+}
+.Title {
+  font-size: 2.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.Rating {
+  font-size: 2rem;
+}
+
+.Director {
+  font-size: 2rem;
+}
+
+.Country {
+  font-size: 2rem;
+}
+
+.Year {
+  font-size: 2rem;
+}
+
+.Cast {
+  font-size: 2rem;
+}
+.CastList {
+  color: red;
+  font-size: 2rem;
+}
