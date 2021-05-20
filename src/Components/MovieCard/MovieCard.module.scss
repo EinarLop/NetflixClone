@@ -8,25 +8,24 @@
   background-color: #292929;
 }
 .Title,
-.Rating,
 .Director,
 .Country,
 .Year {
   width: 100%;
-  margin-bottom: 25px;
 }
 .Title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   width: 100%;
   text-align: center;
+  margin-bottom: 5px;
 }
 
-.Rating {
-  font-size: 2rem;
-}
-
-.Director {
-  font-size: 2rem;
+.YearDirector {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #888787;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .Country {
@@ -37,10 +36,92 @@
   font-size: 2rem;
 }
 
-.Cast {
+.ShowCast {
   font-size: 2rem;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.Cast {
+  width: 100%;
+  margin-bottom: 15px;
 }
 .CastList {
-  color: red;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.Actor {
+  font-size: 1.8rem;
+  &::before {
+    content: "★";
+    color: rgb(238, 215, 5);
+    margin-right: 5px;
+  }
+}
+
+.Icon {
+  width: 100px;
+  height: 100px;
+  justify-self: center;
+}
+
+.IconContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.Description {
+  font-size: 1.8rem;
+  text-align: justify;
+  margin-bottom: 25px;
+}
+
+.Duration,
+.Rating {
+  color: #888787;
+  padding: 5px;
+  font-size: 1.5rem;
+  border: 1px solid #888787;
+}
+
+.DurationRatingContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.GenresContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.Genre {
+  background-color: #575656;
+  padding: 7px 10px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+}
+
+.Button {
+  width: 50%;
+
+  background-color: red;
+
+  border: 1px solid red;
   font-size: 2rem;
+  border-radius: 5px;
+  margin: 0 auto;
+  height: 40px;
 }
