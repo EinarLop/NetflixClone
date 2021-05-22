@@ -23,6 +23,20 @@ const Header = (props) => {
   };
 
   const handleOnSubmit = () => {
+    if (selection != "Stats,Titles" && searchBar.trim() === "") {
+      console.log("Input is empty, cannot send query");
+      return;
+    }
+
+    if (
+      selection == "Stats,Year" &&
+      searchBar.trim() !== "" &&
+      isNaN(searchBar)
+    ) {
+      console.log("Year query needs a numeric input");
+      return;
+    }
+
     props.sendQuery(selection, searchBar);
   };
 
