@@ -28,7 +28,9 @@ const MovieCard = (props) => {
       {/* <GiTv className={styles.Icon} /> */}
       <p className={styles.Title}> {title}</p>
       <p className={styles.YearDirector}>
-        {release_year}, {director}
+        {release_year}
+        {director.trim() == "" ? "" : ", "}
+        {director}
       </p>
       <div className={styles.DurationRatingContainer}>
         <p className={styles.Duration}>{duration}</p>
