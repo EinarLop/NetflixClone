@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import styles from "./AppStyles.module.scss";
 import Header from "./Components/Header/Header.jsx";
 import MovieCard from "./Components/MovieCard/MovieCard.jsx";
+import StatCard from "./Components/StatsCard/StatsCard.jsx";
 import axios from "axios"; // mandar http requests
 
 const SERVER_URL = "http://localhost:3010";
@@ -10,6 +11,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [stats, setStats] = useState([]);
   const [showCards, setShowCards] = useState(true);
+  const [showStats, setShowStats] = useState(true);
 
   const sendQuery = (type, searchTerm) => {
     console.log("type", type);
@@ -23,11 +25,11 @@ function App() {
         if (type.split(",")[0] == "Stats") {
           // Query stats
           console.log("Stats returned:", response.data.data);
-          setShowCards(false);
+          setShowStats(true);
           setStats(response.data.data); // Number
         } else {
           console.log("Query returned:", response.data.data);
-          setShowCards(true);
+          setShowStats(false);
           setCards(response.data.data); // Array
         }
       })
@@ -75,12 +77,17 @@ function App() {
     <>
       <Header sendQuery={sendQuery} />
       <div className={styles.Wrapper}>
-        {showCards &&
-          (cards.length > 0 ? (
-            cards.map((card) => <MovieCard cardInfo={card} />)
+        {showStats ? (
+          stats.length > 0 ? (
+            stats.map((stats) => <StatCard />)
           ) : (
             <p className={styles.p}>No results 😢</p>
-          ))}
+          )
+        ) : cards.length > 0 ? (
+          cards.map((card) => <MovieCard cardInfo={card} />)
+        ) : (
+          <p className={styles.p}>No results 😢</p>
+        )}
       </div>
     </>
   );
