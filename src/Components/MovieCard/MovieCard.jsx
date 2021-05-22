@@ -1,5 +1,6 @@
 import styles from "./MovieCard.module.scss"
 import { GiFilmProjector, GiTv } from "react-icons/gi"
+import { ImPlay2 } from "react-icons/im"
 
 
 const MovieCard = () => {
@@ -52,8 +53,8 @@ const MovieCard = () => {
 
 
 
-      <button className={styles.Button}>▶</button>
-
+      {/* <button className={styles.Button}>▶</button> */}
+      <ImPlay2 className={styles.PlayIcon} />
 
     </div>
   );

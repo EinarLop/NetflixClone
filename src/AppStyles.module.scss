@@ -9,4 +9,11 @@
 
 .Wrapper {
   background-color: #221f1f;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  max-width: 1300px;
+  justify-content: center;
+  margin: 0 auto;
 }

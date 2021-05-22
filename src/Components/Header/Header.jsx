@@ -2,17 +2,20 @@ import Logo from "../logo/logopng.png";
 import Search from "../logo/lupa.png";
 import React from "react";
 import styles from "./HeaderStyles.module.scss";
-
+import { BiSearchAlt } from "react-icons/bi"
 const Header = () => {
   return (
     <div className={styles.Wrapper}>
       <div className={styles.LogoWrapper}>
+
         <img src={Logo} className={styles.Logo}></img>
+        {/* <SiNetflix className={styles.Icon} /> */}
       </div>
-      <div>
-        <img src={Search} className={styles.Search}></img>
+
+      <div className={styles.InputContainer}>
+
         <input
-          placeholder="Introduce la palabra clave"
+          placeholder="Search"
           className={styles.InputBar}
         />
         <select className={styles.Drop}>
@@ -33,6 +36,7 @@ const Header = () => {
             </option>
           </optgroup>
         </select>
+        <BiSearchAlt src={Search} className={styles.Icon} />
       </div>
     </div>
   );

@@ -4,10 +4,14 @@ import MovieCard from "./Components/MovieCard/MovieCard.jsx";
 
 function App() {
   return (
-    <div className={styles.Wrapper}>
+    <>
       <Header />
-      <MovieCard />
-    </div>
+      <div className={styles.Wrapper}>
+        <MovieCard />
+        <MovieCard />
+        <MovieCard />
+      </div>
+    </>
   );
 }
 
