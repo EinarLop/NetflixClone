@@ -4,10 +4,11 @@
   padding: 15px;
 
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .LogoWrapper {
-  display: inline-flex;
+  display: flex;
 }
 
 .Icon {
@@ -49,6 +50,13 @@
   &:focus {
     outline: none;
   }
+  optgroup {
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  option {
+    font-size: 1.8rem;
+  }
 }
 
 .InputContainer {
@@ -56,4 +64,35 @@
   gap: 15px;
   align-items: center;
   margin-top: 12px;
+}
+
+@media (max-width: 1023px) {
+  .Wrapper {
+  }
+
+  .InputContainer {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+  }
+
+  .LogoWrapper {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .InputBar {
+    width: 100%;
+  }
+
+  .Drop {
+    flex-grow: 1;
+  }
+
+  .Button {
+    // width: 20%;
+
+    // margin-left: auto;
+    // text-align: right;
+  }
 }
