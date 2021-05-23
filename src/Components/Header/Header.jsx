@@ -9,9 +9,9 @@ import axios from 'axios'
 const SERVER_URL = "http://localhost:3010";
 
 const Header = (props) => {
-  const [selection, setSelection] = useState("Movie name");
+  const [selection, setSelection] = useState("Movie");
   const [searchBar, setSearchBar] = useState("");
-  const [countryOptions, setCountryOptions] = useState(["Country name"]);
+  const [countryOptions, setCountryOptions] = useState(["Country"]);
 
   useEffect(() => {
     // solicita country names 
