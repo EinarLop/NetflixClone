@@ -15,34 +15,49 @@ function App() {
   const [type, setType] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [errormsg, setErrormsg] = useState("");
+  const [status, setStatus] = useState("");
 
   const handleErrorMsg = (msg) => {
     setErrormsg(msg);
   };
 
   const sendQuery = (type, searchTerm) => {
-    console.log("type", type);
-    console.log("search term", searchTerm);
+    console.log("type:", type, " searchTerm:", searchTerm);
+    let status = <p className={styles.statusp}>Sending query...</p>;
+    setStatus(status);
+
     setType(type);
     setSearchTerm(searchTerm);
+
     const queryString = generateQueryUrl(type, searchTerm);
     console.log("queryString\n", queryString);
+
     axios
       .get(`${queryString}`)
       .then((response) => {
-        console.log("Succesful query");
+        status = (
+          <p className={`${styles.statusp} ${styles.good}`}>Query done</p>
+        );
+        setStatus(status);
+
         if (type.split(",")[0] == "Stats") {
           // Query stats
           console.log("Stats returned:", response.data.data);
           setShowStats(true);
           setStats(response.data.data);
         } else {
+          // Query movies
           console.log("Query returned:", response.data.data);
           setShowStats(false);
           setCards(response.data.data); // Array
         }
       })
       .catch((err) => {
+        console.log("Query returned error");
+        status = (
+          <p className={`${styles.statusp} ${styles.bad}`}>{err.message}</p>
+        );
+        setStatus(status);
         console.error(err.message);
       });
   };
@@ -57,7 +72,6 @@ function App() {
     // Stats query
     else {
       let typeS = type.split(",")[1];
-      console.log("Stats type is", typeS);
       if (typeS == "Country") {
         return `${SERVER_URL}/titles/stats/?type=Movie&release_year=&country=${searchTerm}`;
       } else if (typeS == "Titles") {
@@ -91,6 +105,7 @@ function App() {
       />
       <div className={styles.Wrapper}>
         <p className={styles.p}>{errormsg}</p>
+        {status}
       </div>
       <div className={styles.Wrapper}>
         {showStats ? (

@@ -21,3 +21,13 @@
 .p {
   font-size: 2.5rem;
 }
+
+.statusp {
+  font-size: 1.6rem;
+  .good {
+    color: "green";
+  }
+  .bad {
+    color: "turquoise";
+  }
+}
