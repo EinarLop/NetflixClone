@@ -4,26 +4,46 @@ import Search from "../logo/lupa.png";
 import React from "react";
 import styles from "./HeaderStyles.module.scss";
 import { BiSearchAlt } from "react-icons/bi";
+import axios from 'axios'
+
+const SERVER_URL = "http://localhost:3010";
 
 const Header = (props) => {
   const [selection, setSelection] = useState("Movie name");
-
   const [searchBar, setSearchBar] = useState("");
+  const [countryOptions, setCountryOptions] = useState(["Country name"]);
+
+  useEffect(() => {
+    // solicita country names 
+    console.log("Effect countries")
+    axios.get(`${SERVER_URL}/titles/countries`).then(response => {
+      const countryList = response.data.data;
+      console.log(countryList);
+      setCountryOptions(countryList);
+    }).catch(err => {
+      console.error(err);
+    })
+  }, []);
 
   const handleOnChange = (e) => {
-    console.log("search bar changed");
-    console.log(e.target.value);
+    // console.log("search bar changed");
+    // console.log(e.target.value);
     setSearchBar(e.target.value);
   };
 
   const handleSelection = (e) => {
-    console.log("Selection changed");
-    console.log(e.target.value);
+    // console.log("Selection changed");
+    // console.log(e.target.value);
+    if (e.target.value == "Stats,Country") {
+      setSearchBar("");
+    }
     setSelection(e.target.value);
   };
 
   const handleOnSubmit = () => {
+    props.handleErrorMsg("");
     if (selection != "Stats,Titles" && searchBar.trim() === "") {
+      props.handleErrorMsg("Input is empty, cannot send query");
       console.log("Input is empty, cannot send query");
       return;
     }
@@ -33,12 +53,15 @@ const Header = (props) => {
       searchBar.trim() !== "" &&
       isNaN(searchBar)
     ) {
+      props.handleErrorMsg("Year query needs a numeric input");
       console.log("Year query needs a numeric input");
       return;
     }
 
     props.sendQuery(selection, searchBar);
   };
+
+  const normalInput = selection !== "Stats,Country";
 
   return (
     <div className={styles.Wrapper}>
@@ -48,12 +71,23 @@ const Header = (props) => {
       </div>
 
       <div className={styles.InputContainer}>
-        <input
-          placeholder="Search"
-          className={styles.InputBar}
-          value={searchBar}
-          onChange={handleOnChange}
-        />
+        {normalInput ?
+          (
+            <input
+              placeholder="Search"
+              className={styles.InputBar}
+              value={searchBar}
+              onChange={handleOnChange}
+            />
+          ) :
+          (
+            <select className={styles.Drop} value={searchBar} onChange={handleOnChange}>
+              {countryOptions.map(c => (
+                <option value={c}>{c}</option>
+              ))}
+            </select>
+          )
+        }
         <select
           className={styles.Drop}
           value={selection}
@@ -70,7 +104,7 @@ const Header = (props) => {
           </optgroup>
           <optgroup label="Stats">
             <option value="Stats,Country">Total movies by country</option>
-            <option value="Stats,Titles">Movies and TV shows</option>
+            <option value="Stats,Titles">Total number of movies and TV shows</option>
             <option value="Stats,Year">TV shows by release year</option>
           </optgroup>
         </select>
