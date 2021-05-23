@@ -9,13 +9,22 @@ const SERVER_URL = "http://localhost:3010";
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [stats, setStats] = useState([]);
+  const [stats, setStats] = useState();
   const [showCards, setShowCards] = useState(true);
-  const [showStats, setShowStats] = useState(true);
+  const [showStats, setShowStats] = useState(false);
+  const [type, setType] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [errormsg, setErrormsg] = useState("");
+
+  const handleErrorMsg = (msg) => {
+    setErrormsg(msg);
+  };
 
   const sendQuery = (type, searchTerm) => {
     console.log("type", type);
     console.log("search term", searchTerm);
+    setType(type);
+    setSearchTerm(searchTerm);
     const queryString = generateQueryUrl(type, searchTerm);
     console.log("queryString\n", queryString);
     axios
@@ -26,7 +35,7 @@ function App() {
           // Query stats
           console.log("Stats returned:", response.data.data);
           setShowStats(true);
-          setStats(response.data.data); // Number
+          setStats(response.data.data);
         } else {
           console.log("Query returned:", response.data.data);
           setShowStats(false);
@@ -75,13 +84,20 @@ function App() {
 
   return (
     <>
-      <Header sendQuery={sendQuery} />
+      <Header
+        sendQuery={sendQuery}
+        handleErrorMsg={handleErrorMsg}
+        sendQuery={sendQuery}
+      />
+      <div className={styles.Wrapper}>
+        <p className={styles.p}>{errormsg}</p>
+      </div>
       <div className={styles.Wrapper}>
         {showStats ? (
-          stats.length > 0 ? (
-            stats.map((stats) => <StatCard />)
+          stats != 0 ? (
+            <StatCard stats={stats} searchTerm={searchTerm} type={type} />
           ) : (
-            <p className={styles.p}>No results 😢</p>
+            <p className={styles.p}>No statistics for your search😢</p>
           )
         ) : cards.length > 0 ? (
           cards.map((card) => <MovieCard cardInfo={card} />)
