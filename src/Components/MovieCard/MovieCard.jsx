@@ -18,11 +18,17 @@ const MovieCard = (props) => {
 
   const castList = cast.split(", ");
   const genreList = listed_in.split(", "); // Array
+  const isMovie = type==="Movie";
 
   return (
     <div className={styles.Wrapper}>
       <div className={styles.IconContainer}>
-        <GiFilmProjector className={styles.Icon} />
+        {isMovie ? (
+          <GiFilmProjector className={styles.Icon} />
+        ) : (
+          <GiTv className={styles.Icon}/>
+        )}
+
       </div>
 
       {/* <GiTv className={styles.Icon} /> */}

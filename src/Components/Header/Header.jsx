@@ -34,7 +34,7 @@ const Header = (props) => {
   const handleSelection = (e) => {
     // console.log("Selection changed");
     // console.log(e.target.value);
-    if (e.target.value == "Stats,Country") {
+    if (e.target.value === "Stats,Country") {
       setSearchBar("");
     }
     setSelection(e.target.value);
@@ -42,14 +42,14 @@ const Header = (props) => {
 
   const handleOnSubmit = () => {
     props.handleErrorMsg("");
-    if (selection != "Stats,Titles" && searchBar.trim() === "") {
+    if (selection !== "Stats,Titles" && searchBar.trim() === "") {
       props.handleErrorMsg("Input is empty, cannot send query");
       console.log("Input is empty, cannot send query");
       return;
     }
 
     if (
-      selection == "Stats,Year" &&
+      selection === "Stats,Year" &&
       searchBar.trim() !== "" &&
       isNaN(searchBar)
     ) {

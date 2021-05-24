@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import styles from "./AppStyles.module.scss";
 import Header from "./Components/Header/Header.jsx";
 import MovieCard from "./Components/MovieCard/MovieCard.jsx";
@@ -10,7 +10,6 @@ const SERVER_URL = "http://localhost:3010";
 function App() {
   const [cards, setCards] = useState([]);
   const [stats, setStats] = useState();
-  const [showCards, setShowCards] = useState(true);
   const [showStats, setShowStats] = useState(false);
   const [type, setType] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,7 +39,7 @@ function App() {
         );
         setStatus(status);
 
-        if (type.split(",")[0] == "Stats") {
+        if (type.split(",")[0] === "Stats") {
           // Query stats
           console.log("Stats returned:", response.data.data);
           setShowStats(true);
@@ -64,19 +63,19 @@ function App() {
 
   const generateQueryUrl = (type, searchTerm) => {
     // Movie Cards query
-    if (type == "Movie" || type == "TV Show") {
+    if (type === "Movie" || type === "TV Show") {
       return `${SERVER_URL}/titles/query/?type=${type}&title=${searchTerm}&country=`;
-    } else if (type == "cast") {
+    } else if (type === "cast") {
       return `${SERVER_URL}/titles/actor/?cast=${searchTerm}`;
     }
     // Stats query
     else {
       let typeS = type.split(",")[1];
-      if (typeS == "Country") {
+      if (typeS === "Country") {
         return `${SERVER_URL}/titles/stats/?type=Movie&release_year=&country=${searchTerm}`;
-      } else if (typeS == "Titles") {
+      } else if (typeS === "Titles") {
         return `${SERVER_URL}/titles/stats/?type=&release_year=&country=`;
-      } else if (typeS == "Year") {
+      } else if (typeS === "Year") {
         return `${SERVER_URL}/titles/stats/?type=TV+Show&release_year=${searchTerm}&country=`;
       }
     }
@@ -109,13 +108,13 @@ function App() {
       </div>
       <div className={styles.Wrapper}>
         {showStats ? (
-          stats != 0 ? (
+          stats !== 0 ? (
             <StatCard stats={stats} searchTerm={searchTerm} type={type} />
           ) : (
             <p className={styles.p}>No statistics for your search😢</p>
           )
         ) : cards.length > 0 ? (
-          cards.map((card) => <MovieCard cardInfo={card} />)
+          cards.map((card, index) => <MovieCard key={index} cardInfo={card} />)
         ) : (
           <p className={styles.p}>No results 😢</p>
         )}

@@ -7,22 +7,19 @@ import styles from "./StatCardStyles.module.scss"
 
 const StatsCard = (props) => {
   const [message, setMessage] = useState();
-  const [type, setType] = useState("")
-
+  const {type, searchTerm, stats} = props;
 
   useEffect(() => {
-    setType(props.type.split(",")[1])
-    if (type === "Country") {
-
-      setMessage(`Total number of movies from ${props.searchTerm}: ${props.stats} `)
+    if (type === "Stats,Country") {
+      setMessage(`Total number of movies from ${searchTerm}: ${stats} `)
     }
-    else if (type === "Year") {
-      setMessage(`Total number of TV shows released in ${props.searchTerm}: ${props.stats}`)
+    else if (type === "Stats,Year") {
+      setMessage(`Total number of TV shows released in ${searchTerm}: ${stats}`)
     }
     else {
-      setMessage(`Total number of movies and TV shows on Netflix: ${props.stats}`)
+      setMessage(`Total number of movies and TV shows on Netflix: ${stats}`)
     }
-  }, [props.stats, props.searchTerm]);
+  }, [stats, searchTerm, type]);
 
   return (
     <div className={styles.Wrapper}>
