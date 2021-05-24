@@ -8,7 +8,7 @@ const Header = () => {
     <div className={styles.Wrapper}>
       <div className={styles.LogoWrapper}>
 
-        <img src={Logo} className={styles.Logo}></img>
+        <img alt='logo' src={Logo} className={styles.Logo}></img>
         {/* <SiNetflix className={styles.Icon} /> */}
       </div>
 
